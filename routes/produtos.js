@@ -1,21 +1,12 @@
 const express = require('express');
-const Produto = require("../models/produto");
 const routerProduto = express.Router();
+const ProdutoController = require("../controller/produto_controller")
 
-routerProduto.get('/', (req, res, next) => {
-    res.status(200).send({
-        mensagem: 'GET Produtos de produtos',
-    });
-})
+const produtoController = new ProdutoController();
 
-routerProduto.post('/', (req, res, next) => {
-    const { nome, id } = req.body;
+routerProduto.get('/', produtoController.listarTodos.bind(produtoController))
 
-    const produto = new Produto(nome, id);
-    res.status(200).send(
-        produto
-    )
-})
+routerProduto.post('/', produtoController.createProduto.bind(produtoController))
 
 routerProduto.put('/', (req, res, next) => {
     res.status(200).send({
