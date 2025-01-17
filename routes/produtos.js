@@ -8,26 +8,9 @@ routerProduto.get('/', produtoController.listarTodos.bind(produtoController))
 
 routerProduto.post('/', produtoController.createProduto.bind(produtoController))
 
-routerProduto.put('/', (req, res, next) => {
-    res.status(200).send({
-        mensagem: 'PUT Produto de produto',
-    })
-})
+routerProduto.get('/:id_produto', produtoController.buscarProduto.bind(produtoController));
 
-routerProduto.get('/:id_produto', (req, res, next) => {
-    if (req.params.id_produto === '1') {
-        res.status(200).send({
-            mensagem: 'GET Produto de produto',
-        })
-
-        return
-    }
-
-    res.status(200).send({
-        mensagem: 'GET Produto de produto',
-        id_produto: req.params.id_produto,
-    });
-})
+routerProduto.put('/', produtoController.updateProduto.bind(produtoController));
 
 routerProduto.patch('/', (req, res, next) => {
     res.status(200).send({
@@ -35,10 +18,6 @@ routerProduto.patch('/', (req, res, next) => {
     })
 })
 
-routerProduto.delete('/', (req, res, next) => {
-    res.status(200).send({
-        mensagem: 'DELETE Produto de produto',
-    })
-})
+routerProduto.delete('/:id_produto', produtoController.deleteProduto.bind(produtoController));
 
 module.exports = routerProduto;
